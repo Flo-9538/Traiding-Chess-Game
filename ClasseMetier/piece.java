@@ -46,7 +46,9 @@ public class piece {
     }
 
     public ArrayList<int[]> caseAtegnable(){
-
+        for (int[] i: this.mouvement){
+            
+        }
         return null;
     }
 

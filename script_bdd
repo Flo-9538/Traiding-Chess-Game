@@ -1,0 +1,66 @@
+CREATE TABLE Joueur(
+   id_joueur SERIAL,
+   idantifiant VARCHAR(30),
+   mdp VARCHAR(50),
+   argent VARCHAR(50),
+   PRIMARY KEY(id_joueur)
+);
+
+CREATE TABLE pièces(
+   id_piece int,
+   nom VARCHAR(30),
+   classe VARCHAR(50),
+   mouvement VARCHAR(60),
+   pouvoir VARCHAR(50),
+   lien_image VARCHAR(50),
+   quantite_max int,
+   PRIMARY KEY(id_piece)
+);
+
+CREATE TABLE Deck(
+   id_deck int,
+   nom VARCHAR(50),
+   id_joueur INT NOT NULL,
+   PRIMARY KEY(id_deck),
+   FOREIGN KEY(id_joueur) REFERENCES Joueur(id_joueur)
+);
+
+CREATE TABLE Partie(
+   id_partie SMALLINT,
+   tour_joueur BOOLEAN,
+   id_deck int NOT NULL,
+   id_joueur INT NOT NULL,
+   PRIMARY KEY(id_partie),
+   FOREIGN KEY(id_deck) REFERENCES Deck(id_deck),
+   FOREIGN KEY(id_joueur) REFERENCES Joueur(id_joueur)
+);
+
+CREATE TABLE possède(
+   id_joueur INT,
+   id_piece int,
+   nombre SMALLINT,
+   PRIMARY KEY(id_joueur, id_piece),
+   FOREIGN KEY(id_joueur) REFERENCES Joueur(id_joueur),
+   FOREIGN KEY(id_piece) REFERENCES pièces(id_piece)
+);
+
+CREATE TABLE Contient(
+   id_piece int,
+   id_deck int,
+   PRIMARY KEY(id_piece, id_deck),
+   FOREIGN KEY(id_piece) REFERENCES pièces(id_piece),
+   FOREIGN KEY(id_deck) REFERENCES Deck(id_deck)
+);
+
+CREATE TABLE Variable_Partie(
+   id_piece int,
+   id_partie SMALLINT,
+   id_piece_partie SMALLINT,
+   Couleur VARCHAR(50),
+   x int,
+   y int,
+   pouvoir_utilise SMALLINT,
+   PRIMARY KEY(id_piece, id_partie),
+   FOREIGN KEY(id_piece) REFERENCES pièces(id_piece),
+   FOREIGN KEY(id_partie) REFERENCES Partie(id_partie)
+);

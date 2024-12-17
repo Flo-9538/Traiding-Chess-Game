@@ -46,11 +46,17 @@ public class piece {
     }
 
     public ArrayList<int[]> caseAtegnable(){
-        for (int[] i: this.mouvement){
-            
+        ArrayList<int[]> caseAtegnable = new ArrayList<int[]>();
+        for (int[] mouv: this.mouvement){
+            if (this.x+mouv[0]>0 && this.y+mouv[1]>0 && this.x+mouv[0]<0 && this.y+mouv[1]>0){
+                int[] mouve = {this.x+mouv[0],this.y+mouv[1]};
+                caseAtegnable.add(mouve);
+            }
         }
-        return null;
+        return caseAtegnable;
     }
+
+    
 
 
 
